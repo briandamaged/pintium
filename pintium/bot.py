@@ -1,11 +1,10 @@
-from selenium import webdriver
 
 from .widgets import LoginPage, SearchPage
 
 
 class Bot(object):
-    def __init__(self, session=None):
-        self.session = session if session else webdriver.Firefox()
+    def __init__(self, session):
+        self.session = session
         self.__offset = 0
         self.__pins = []
 

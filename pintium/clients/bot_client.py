@@ -1,5 +1,7 @@
-from ..bot import Bot
+from contextlib import contextmanager
+from selenium import webdriver
 
+from ..bot import Bot
 
 class BotClient(object):
     """
@@ -12,7 +14,22 @@ class BotClient(object):
         self.username = username
         self.password = password
 
+    def create_bot(self, session):
+        return Bot(session).authenticate(self.username, self.password)
+
+    @contextmanager
+    def session(self):
+        session = webdriver.Firefox()
+        try:
+            yield self.create_bot(session)
+        finally:
+            session.quit()
+
     def search_for(self, *terms):
-        bot = Bot().authenticate(self.username, self.password)
+        """
+        WARNING: This method is deprecated.  Please use the
+                 session() contextmanager instead.
+        """
+        bot = self.create_bot(webdriver.Firefox())
         bot.search_for(*terms)
         return bot
