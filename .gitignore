@@ -1,2 +1,9 @@
 # Ignore Python artifacts
 *.pyc
+
+
+# Ignore build artifacts
+/build
+
+/dist
+/pintium.egg-info
