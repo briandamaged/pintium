@@ -3,8 +3,9 @@ from .widgets import LoginPage, SearchPage
 
 
 class Bot(object):
-    def __init__(self, session):
+    def __init__(self, session, retries = 1):
         self.session = session
+        self.retries = 1
         self.__offset = 0
         self.__pins = []
 
@@ -31,10 +32,15 @@ class Bot(object):
         self.session.quit()
 
     def next(self):
-        while not self.__pins:
-            self.search_page.load_more_pins()
-            self.__pins = self.search_page.get_pins(offset=self.__offset)
-            self.__offset += len(self.__pins)
+        for i in xrange(self.retries + 1):
+            if self.__pins:
+                break
+            else:
+                self.search_page.load_more_pins()
+                self.__pins = self.search_page.get_pins(offset=self.__offset)
+                self.__offset += len(self.__pins)
+        else:
+            raise StopIteration("No more pins after %i retries" % (self.retries, ))
 
         return self.__pins.pop(0)
 
