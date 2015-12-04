@@ -193,3 +193,16 @@ class Pin(object):
         c = self.comment_count_element
         return int(c.text) if c else 0
 
+    def to_dict(self):
+        return {
+            "pinterest_url": self.pinterest_url,
+            "pid_id": self.pin_id,
+            "site_url": self.site_url,
+            "image_url": self.image_url,
+            "title": self.title,
+            "description": self.description,
+            "repin_count": self.repin_count,
+            "like_count": self.like_count,
+            "comment_count": self.comment_count
+        }
+
