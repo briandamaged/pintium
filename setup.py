@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'pintium',
-    version = '2.0.0a1',
+    version = '2.0.0a2',
     description = 'Pinterest + Selenium = Pintium',
     author = 'Brian Lauber',
     author_email = 'constructible.truth@gmail.com',
