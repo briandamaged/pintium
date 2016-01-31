@@ -51,10 +51,12 @@ class LoginPage(object):
     def submit(self):
         self.login_button.click()
 
+
     def authenticate(self, username, password):
         self.username = username
         self.password = password
         self.submit()
+        sleep(DELAY)
 
 
 class SearchPage(object):
