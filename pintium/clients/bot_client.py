@@ -18,8 +18,8 @@ class BotClient(object):
         return Bot(session).authenticate(self.username, self.password)
 
     @contextmanager
-    def session(self):
-        session = webdriver.Firefox()
+    def session(self, session = None):
+        session = session or webdriver.Firefox()
         try:
             yield self.create_bot(session)
         finally:
