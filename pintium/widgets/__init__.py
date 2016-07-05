@@ -1,4 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
+
 from time import sleep
 
 # FYI: Might need to adjust this for Python 3 compatibility
@@ -70,7 +72,10 @@ class SearchPage(object):
     def search_for(self, *terms):
         sf = self.search_field
         sf.clear()
-        sf.send_keys(" ".join(terms) + "\n")
+        sf.send_keys(" ".join(terms))
+        sleep(2)
+        sf.send_keys(Keys.RETURN)
+        sleep(2)
 
     def load_more_pins(self):
         self.session.execute_script("scroll(0, document.body.scrollHeight);")
